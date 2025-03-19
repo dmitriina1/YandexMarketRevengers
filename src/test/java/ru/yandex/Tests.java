@@ -11,10 +11,10 @@ import static steps.StepsAll.*;
 
 public class Tests extends BaseTest{
 
-    @DisplayName("Проверка открытия сайта ЯндексМаркета")
+    @DisplayName("Проверка работы сайта ЯндексМаркета")
     @ParameterizedTest(name="{displayName}: {arguments}")
     @MethodSource("helpers.DataProvider#providerCheckingMarket")
-    public void testYandexMarket(String siteTitle,String catalogContent, String catalogSubItem, String minimumPrice, String maximumPrice, List<String> brandList) {
+    public void testYandexMarket(String siteTitle,String catalogContent, String catalogSubItem, String minimumPrice, String maximumPrice, List<String> brandList, int elementsCountOnFirstPage) {
         openSite(testsProperties.yandexMarketUrl(), siteTitle, chromeDriver);
         findCatalog();
         catalogContentMouseOver(catalogContent);
@@ -22,8 +22,13 @@ public class Tests extends BaseTest{
         checkingCatalogSubItemTitle(catalogSubItem);
         inputPriceFilter(minimumPrice, maximumPrice);
         inputBrandsFilter(brandList);
+        checkCountElementsOnFirstPage(elementsCountOnFirstPage);
+        checkFiltersWork(minimumPrice, maximumPrice, brandList);
+        pageUpAndSaveFirstElement();
+        inputFirstElementName();
+        getFirstElementName();
+        searchFirstElement();
     }
 }
-//, "DELL", "BlackView", "azerty", "prestigio"
 
 
