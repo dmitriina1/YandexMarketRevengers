@@ -12,12 +12,12 @@ import java.util.List;
 import static helpers.Properties.testsProperties;
 import static helpers.Assertions.assertTrue;
 
+
 public class StepsAll {
     private static WebDriverWait wait;
     private static WebDriver driver;
     private static YandexBeforeSearch yandexBeforeSearch;
     private static YandexAfterSearch yandexAfterSearch;
-
 
     @Step("Переходим на сайт: {url}")
     public static void openSite(String url, String title, WebDriver currentDriver) {
@@ -59,17 +59,18 @@ public class StepsAll {
         yandexAfterSearch.inputPriceInterval(minimumPrice, maximumPrice);
     }
 
-    @Step("Выбираем бренды {brands} в фильтре")
+    @Step("Выбираем производителей {brands} в фильтре")
     public static void inputBrandsFilter(List<String> brands){
         yandexAfterSearch.inputBrands(brands);
     }
 
-    @Step("Проверка количества элементов на первой странице")
+    @Step("Проверка количества элементов на первой странице (их должно быть больше {elementsCount})")
     public static void checkCountElementsOnFirstPage(int elementsCount){
         yandexAfterSearch.checkCountElementsOnFirstPage(elementsCount);
     }
 
-    @Step("Проверка предложений по соответсвию фильтрам")
+    @Step("Проверка предложений по соответсвию фильтрам: минимальная цена: {minimumPrice}, " +
+            "максимальная цена: {maximumPrice}, производитель {brands}")
     public static void checkFiltersWork(String minimumPrice, String maximumPrice, List<String> brands){
         yandexAfterSearch.checkFilters(minimumPrice, maximumPrice, brands);
     }
